@@ -83,7 +83,8 @@ class _CalendarViewWidgetState extends State<CalendarViewWidget> {
           padding: widget.padding,
           margin: widget.margin,
           //使用const，保证外界的setState不会刷新日历这个widget
-          child: CalendarContainer(widget.calendarController)),
+          child: CalendarContainer(widget.calendarController)
+      ),
     );
   }
 }
@@ -206,7 +207,7 @@ class CalendarContainerState extends State<CalendarContainer>
            */
           calendarProvider.calendarConfiguration.weekBarItemWidgetBuilder(),
           AnimatedContainer(
-              duration: Duration(milliseconds: 500),
+              duration: Duration(milliseconds: 0),
               height: expand ? totalHeight : itemHeight,
               child: IndexedStack(
                 index: index,

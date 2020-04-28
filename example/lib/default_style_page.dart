@@ -1,3 +1,4 @@
+import 'package:example1/pullDrag/pull_drag_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_calendar/flutter_custom_calendar.dart';
 
@@ -18,6 +19,7 @@ class _DefaultStylePageState extends State<DefaultStylePage> {
   ValueNotifier<String> selectText;
 
   CalendarController controller;
+  bool _open = true;
 
   @override
   void initState() {
@@ -54,41 +56,27 @@ class _DefaultStylePageState extends State<DefaultStylePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: new Container(
-        child: new Column(
-          children: <Widget>[
-            new Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                new IconButton(
-                    icon: Icon(Icons.navigate_before),
-                    onPressed: () {
-//                      controller.moveToPreviousMonth();
-                      controller.previousPage();
-                    }),
-                ValueListenableBuilder(
-                    valueListenable: text,
-                    builder: (context, value, child) {
-                      return new Text(text.value);
-                    }),
-                new IconButton(
-                    icon: Icon(Icons.navigate_next),
-                    onPressed: () {
-//                      controller.moveToNextMonth();
-                      controller.nextPage();
-                    }),
-              ],
+      body: Container(
+          color: Colors.white,
+          child: PullDragWidget(
+            dragHeight: 460,
+            parallaxRatio: 0.0,
+            thresholdRatio: 0.2,
+            header: _calendarContent(),
+            child: Container(
+              height: 10,
+              width: 20,
+              color: Colors.amberAccent,
             ),
-            CalendarViewWidget(
-              calendarController: controller,
-            ),
-            ValueListenableBuilder(
-                valueListenable: selectText,
-                builder: (context, value, child) {
-                  return new Text(selectText.value);
-                }),
-          ],
-        ),
+            callback: ((res) {
+              if (_open != res) {
+                controller.toggleExpandStatus();
+              }
+              setState(() {
+                _open = res;
+              });
+            }),
+          )
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -97,6 +85,46 @@ class _DefaultStylePageState extends State<DefaultStylePage> {
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+
+  Widget _calendarContent() {
+    return new Container(
+      child: new Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: <Widget>[
+          new Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              new IconButton(
+                  icon: Icon(Icons.navigate_before),
+                  onPressed: () {
+                    controller.moveToPreviousMonth();
+                    controller.previousPage();
+                  }),
+              ValueListenableBuilder(
+                  valueListenable: text,
+                  builder: (context, value, child) {
+                    return new Text(text.value);
+                  }),
+              new IconButton(
+                  icon: Icon(Icons.navigate_next),
+                  onPressed: () {
+//                      controller.moveToNextMonth();
+                    controller.nextPage();
+                  }),
+            ],
+          ),
+          CalendarViewWidget(
+            calendarController: controller,
+          ),
+//          ValueListenableBuilder(
+//              valueListenable: selectText,
+//              builder: (context, value, child) {
+//                return new Text(selectText.value);
+//              }),
+        ],
+      ),
     );
   }
 }

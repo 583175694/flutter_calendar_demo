@@ -26,6 +26,8 @@ dependencies:
   random_pk: ^0.0.3
   flutter_custom_calendar:
     path: ../
+  fluttertoast: ^3.0.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
