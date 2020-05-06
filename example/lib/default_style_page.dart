@@ -63,11 +63,11 @@ class _DefaultStylePageState extends State<DefaultStylePage> {
             parallaxRatio: 0.0,
             thresholdRatio: 0.2,
             header: _calendarContent(),
-            child: Container(
-              height: 10,
-              width: 20,
-              color: Colors.amberAccent,
-            ),
+//            child: Container(
+//              height: 10,
+//              width: 20,
+//              color: Colors.amberAccent,
+//            ),
             callback: ((res) {
               if (_open != res) {
                 controller.toggleExpandStatus();

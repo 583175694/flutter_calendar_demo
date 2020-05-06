@@ -135,15 +135,16 @@ class _RedStylePageState extends State<RedStylePage> {
                       child: new Text(selectText.value),
                     );
                   }),
-            Flexible(
-                child: new ListView.separated(
-                  shrinkWrap: true,
-                  itemBuilder: (context, item) {
-                    return buildListData(context, titleItems[item], iconItems[item], subTitleItems[item], item);
-                    },
-                  separatorBuilder: (BuildContext context, int index) => new Divider(),
-                  itemCount: iconItems.length)
-            )],
+              Flexible(
+                  child: new ListView.separated(
+                    shrinkWrap: true,
+                    itemBuilder: (context, item) {
+                      return buildListData(context, titleItems[item], iconItems[item], subTitleItems[item], item);
+                      },
+                    separatorBuilder: (BuildContext context, int index) => new Divider(),
+                    itemCount: iconItems.length)
+              )
+            ],
           ),
         ),
         floatingActionButton: FloatingActionButton(

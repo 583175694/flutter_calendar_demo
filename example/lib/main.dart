@@ -1,5 +1,6 @@
 import 'package:example1/custom_offset_page.dart';
 
+import 'default_style_page2.dart';
 import 'only_week_page.dart';
 import 'red_style_page.dart';
 import 'package:flutter/material.dart';
@@ -27,9 +28,7 @@ class MyApp extends StatelessWidget {
           "/default": (context) => DefaultStylePage(
                 title: "默认风格+单选",
               ),
-          "/custom": (context) => CustomStylePage(
-                title: "自定义风格+单选",
-              ),
+          "/custom": (context) => SliverHeaderPage(),
           "/multi_select": (context) => MultiSelectStylePage(
                 title: "自定义风格+多选",
               ),
@@ -50,7 +49,8 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: HomePage());
+        home: HomePage()
+    );
   }
 }
 
