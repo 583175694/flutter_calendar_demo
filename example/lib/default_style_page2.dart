@@ -108,7 +108,7 @@ class _CollapsingState extends State<SliverHeaderPage> {
     _scrollController = new ScrollController();
     _scrollController.addListener(() {
       print(_scrollController.offset);
-      if (_scrollController.offset > 240.0) {
+      if (_scrollController.offset > 256.0) {
         if (currentView == 'month') {
           controller.toggleExpandStatus();
         }
@@ -135,15 +135,29 @@ class _CollapsingState extends State<SliverHeaderPage> {
             slivers: <Widget>[
               SliverAppBar(
                 bottom: PreferredSize(
-                  preferredSize: Size(200, 100),
+                  preferredSize: Size(200, 86),
                   child: Container()
                 ),
                 backgroundColor: Colors.white,
-                expandedHeight: 400.0,
-                flexibleSpace: _calendarContent(),
-                forceElevated: false,
+                expandedHeight: 396.0,
+//                flexibleSpace: FlexibleSpaceBar(
+//                    background: _calendarContent(),
+//                    collapseMode: CollapseMode.none
+//                ),
+                flexibleSpace: Stack(
+                  overflow: Overflow.clip,
+                  children: <Widget>[
+                    Positioned(
+                      top: 0,
+                      child: _calendarContent()
+                    ),
+                  ],
+                ),
                 elevation: 0,
                 pinned: pinned,
+//                iconTheme: IconThemeData(
+//                  opacity: 1.0
+//                )
               ),
               SliverFixedExtentList(
                 itemExtent: 80.0,
@@ -164,7 +178,7 @@ class _CollapsingState extends State<SliverHeaderPage> {
       child: new Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
-          new Row(
+          Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               new IconButton(
@@ -189,11 +203,6 @@ class _CollapsingState extends State<SliverHeaderPage> {
           CalendarViewWidget(
             calendarController: controller,
           ),
-//          ValueListenableBuilder(
-//              valueListenable: selectText,
-//              builder: (context, value, child) {
-//                return new Text(selectText.value);
-//              }),
         ],
       ),
     );
